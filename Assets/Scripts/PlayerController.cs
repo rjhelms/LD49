@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public float maxSpeed;
     public float acceleration;
     public float steering;
+    public float driftFactor;
     public float reticleDistance;
     public Vector2 aimVector;
 
@@ -48,7 +49,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Change velocity based on rotation
-        float driftForce = Vector2.Dot(rb.velocity, rb.GetRelativeVector(Vector2.left)) * 2.0f;
+        float driftForce = Vector2.Dot(rb.velocity, rb.GetRelativeVector(Vector2.left)) * driftFactor;
         Vector2 relativeForce = Vector2.right * driftForce;
         Debug.DrawLine(rb.position, rb.GetRelativePoint(relativeForce), Color.green);
         rb.AddForce(rb.GetRelativeVector(relativeForce));
