@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6439129740700581401}
   m_Layer: 7
   m_Name: WaterProjectile
-  m_TagString: Untagged
+  m_TagString: PlayerProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -134,6 +134,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e800a6d0c73478b44a84f82770aefa5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  launchForce: 50
+  launchForce: 60
   aimFudge: 0.1
-  timeToLive: 1
+  timeToLive: 1.2

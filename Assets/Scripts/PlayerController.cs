@@ -92,7 +92,8 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButton("Fire1"))
         {
-            GameObject projectile = GameObject.Instantiate(projectilePrefab, waterCannonTransform.GetChild(0).position, Quaternion.identity, projectileParent);
+            GameObject projectile = GameObject.Instantiate(
+                projectilePrefab, waterCannonTransform.GetChild(0).position, Quaternion.identity, projectileParent);
             projectile.GetComponent<Projectile>().InitializeMovement(rb.velocity, aimVector);
         }
     }
