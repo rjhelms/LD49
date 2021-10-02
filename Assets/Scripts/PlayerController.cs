@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     private float currentSpeed;
     private Transform reticleTransform;
     private Transform waterCannonTransform;
-
+    private Transform projectileParent;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
         this.mainCamera = Camera.main;
         reticleTransform = GameObject.Find("Reticle").transform;
         waterCannonTransform = GameObject.Find("WaterCannon").transform;
+        projectileParent = GameObject.Find("ProjectileParent").transform;
     }
 
     private void FixedUpdate()
@@ -70,11 +71,8 @@ public class PlayerController : MonoBehaviour
         }
         currentSpeed = rb.velocity.magnitude;
         speedkmh = (int)(currentSpeed * 3.6f);
-
-
-
-
     }
+
     // Update is called once per frame
     void Update()
     {
@@ -94,7 +92,8 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButton("Fire1"))
         {
-            GameObject.Instantiate(projectilePrefab, waterCannonTransform.GetChild(0).position, Quaternion.identity);
+            GameObject projectile = GameObject.Instantiate(projectilePrefab, waterCannonTransform.GetChild(0).position, Quaternion.identity, projectileParent);
+            projectile.GetComponent<Projectile>().InitializeMovement(rb.velocity, aimVector);
         }
     }
 }
