@@ -8,16 +8,22 @@ public class PlayerController : MonoBehaviour
     public float maxSpeed;
     public float acceleration;
     public float steering;
+    public float reticleDistance;
+    public Vector2 aimVector;
 
     public int speedkmh;
 
+    private Camera mainCamera;
     private Rigidbody2D rb;
     private float currentSpeed;
+    private Transform reticleTransform;
 
     // Start is called before the first frame update
     void Start()
     {
         this.rb = GetComponent<Rigidbody2D>();
+        this.mainCamera = Camera.main;
+        reticleTransform = GameObject.Find("Reticle").transform;
     }
 
     private void FixedUpdate()
@@ -55,11 +61,22 @@ public class PlayerController : MonoBehaviour
         }
         currentSpeed = rb.velocity.magnitude;
         speedkmh = (int)(currentSpeed * 3.6f);
-    }
 
+
+
+
+    }
     // Update is called once per frame
     void Update()
     {
+        // move main camera - this is dumb
+        mainCamera.transform.position = transform.position + new Vector3(0, 0, -10);
 
+        // calculate aimVector based on mouse position - this needs to happen after camera move
+        Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        aimVector = (mousePosition - (Vector2)transform.position).normalized;
+
+        // move reticle
+        reticleTransform.position = (Vector2)mainCamera.transform.position + (aimVector * reticleDistance);
     }
 }

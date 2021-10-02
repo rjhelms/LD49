@@ -4,10 +4,10 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: 8444899175594996626
-    second: player_car_0
+    second: player_car
   - first:
       213: 2464344999480916751
-    second: player_car_1
+    second: player_reticle
   - first:
       213: -7383342297813302792
     second: player_car_2
@@ -115,7 +115,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: player_car_0
+      name: player_car
       rect:
         serializedVersion: 2
         x: 0
@@ -136,10 +136,10 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player_car_1
+      name: player_reticle
       rect:
         serializedVersion: 2
-        x: 64
+        x: 32
         y: 0
         width: 32
         height: 32
@@ -152,48 +152,6 @@ TextureImporter:
       bones: []
       spriteID: f0bf11a68bc133220800000000000000
       internalID: 2464344999480916751
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: player_car_2
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8f1c8bb7c49198990800000000000000
-      internalID: -7383342297813302792
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: player_car_3
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d9f02204f87fc6700800000000000000
-      internalID: 535074650378604445
       vertices: []
       indices: 
       edges: []
