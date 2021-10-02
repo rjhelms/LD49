@@ -11,3 +11,40 @@ driving around - trying to get supplies (or soldiers?) from one location to anot
 
 shooting protestors with a water cannon lol
 
+
+
+concept:
+	jeep driver with the military after a coup
+	jeep has a water cannon
+	trying to maintain political stability by driving around a city
+
+gameplay:
+	main metric is STABILITY - game over when this runs out
+	drive around city with citizens milling around
+	random events occur to be dealt with - arrow on screen pointing to them (when they are off-screen)
+	can shoot water cannon at citizens to stagger
+		small stability drop if hitting a "normal" citzien
+		small stability gain if hitting a protester
+	citizens die if you run over them (while driving too fast)
+		large stability drop if killing a normal citizen
+		small stability drop if killing a protester
+		
+citizen spawning
+	a few citizen spawn points throughout city
+	game maintains a target value, periodically spawns citizens when below it
+		faster when below 50%
+
+events:
+	protest:
+		game chooses a random protest point
+			ie police station, presidential palace, etc
+			some number of citizens in the area turn into protesters
+			stability drops gradually while protest is happening
+			
+			protesters dispersed by hitting them w/ water cannon
+			once X% of protesters are dispersed, event ends
+	
+	item delivery:
+		pick up item from a location, drop it off at another
+		stability gain on successful delivery
+		target time for each phase - stability drops gradually once over that target

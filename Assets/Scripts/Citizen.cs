@@ -37,6 +37,7 @@ public class Citizen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        transform.name += Time.fixedTime;
         state = CitizenState.WALK;
         walkSpeed = walkSpeed * Random.Range(1 - speedRandomness, 1 + speedRandomness);
         runSpeed = runSpeed * Random.Range(1 - speedRandomness, 1 + speedRandomness);
@@ -67,18 +68,58 @@ public class Citizen : MonoBehaviour
             case CitizenState.WALK:
                 DoWalkMovement();
                 break;
+            case CitizenState.PROTEST:
+                DoProtestMovement();
+                break;
             case CitizenState.STAGGER:
                 if (Time.fixedTime >= stateEndTime)
                     state = CitizenState.WALK;
                 break;
             case CitizenState.DEAD:
-                if (Time.fixedDeltaTime >= stateEndTime)
+                if (Time.fixedTime >= stateEndTime)
                     Destroy(gameObject);
                 break;
             default:
                 break;
         }
 
+    }
+    private void DoProtestMovement()
+    {
+        if (!validPath & seeker.IsDone())
+        {
+            // TODO: change target detection for protest
+            targetPosition = (Vector2)transform.position + (Random.insideUnitCircle * wanderDistance);
+            seeker.StartPath(transform.position, targetPosition, OnPathComplete);
+        }
+        else if (path != null)
+        {
+            float distanceToWaypoint;
+            while (true)
+            {
+                distanceToWaypoint = Vector2.Distance(transform.position, path.vectorPath[currentWaypoint]);
+                if (distanceToWaypoint < nextWaypointDistance)
+                {
+                    if (currentWaypoint + 1 < path.vectorPath.Count)
+                    {
+                        currentWaypoint++;
+                    }
+                    else
+                    {
+                        validPath = false;
+                        break;
+                    }
+                }
+                else
+                {
+                    break;
+                }
+            }
+            var speedFactor = validPath ? Mathf.Sqrt(distanceToWaypoint / nextWaypointDistance) : 1f;
+            Vector2 dir = (path.vectorPath[currentWaypoint] - transform.position).normalized;
+            Vector2 velocity = dir * runSpeed * speedFactor;
+            rb.velocity = velocity;
+        }
     }
 
     private void DoWalkMovement()
@@ -158,8 +199,8 @@ public class Citizen : MonoBehaviour
     {
         state = CitizenState.DEAD;
         validPath = false;
-        stateEndTime = Time.fixedDeltaTime + deadTime;
+        stateEndTime = Time.fixedTime + deadTime;
         // disable colliders
-        // GetComponent<Collider2D>().enabled = false;
+        GetComponent<Collider2D>().enabled = false;
     }
 }
