@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8919675295938530004}
   m_Layer: 9
   m_Name: Citizen
-  m_TagString: Untagged
+  m_TagString: Citizen
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -127,8 +127,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  wanderDistance: 30
+  walkWanderDistance: 30
   targetPosition: {x: 0, y: 0}
+  protestWanderDistance: 10
+  protestTarget: {x: 0, y: 0}
   nextWaypointDistance: 1
   walkSpeed: 1.7
   runSpeed: 5.2

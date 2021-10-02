@@ -6,6 +6,9 @@ TagManager:
   tags:
   - PlayerProjectile
   - CitizenSpawner
+  - ProtestSite
+  - TransportSite
+  - Citizen
   layers:
   - Default
   - TransparentFX

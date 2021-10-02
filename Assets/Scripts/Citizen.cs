@@ -16,8 +16,11 @@ public enum CitizenState
 public class Citizen : MonoBehaviour
 {
     public CitizenState state;
-    public float wanderDistance;
+    public float walkWanderDistance;
     public Vector2 targetPosition;
+
+    public float protestWanderDistance;
+    public Vector2 protestTarget;
     public float nextWaypointDistance;
     public Path path;
     public float walkSpeed;
@@ -30,13 +33,16 @@ public class Citizen : MonoBehaviour
 
     private SpriteRenderer sr;
     private Rigidbody2D rb;
+    private GameController gc;
     private Seeker seeker;
     private bool validPath;
     private int currentWaypoint;
     private float stateEndTime;
+    
     // Start is called before the first frame update
     void Start()
     {
+        gc = FindObjectOfType<GameController>();
         transform.name += Time.fixedTime;
         state = CitizenState.WALK;
         walkSpeed = walkSpeed * Random.Range(1 - speedRandomness, 1 + speedRandomness);
@@ -73,7 +79,7 @@ public class Citizen : MonoBehaviour
                 break;
             case CitizenState.STAGGER:
                 if (Time.fixedTime >= stateEndTime)
-                    state = CitizenState.WALK;
+                    SetWalk();
                 break;
             case CitizenState.DEAD:
                 if (Time.fixedTime >= stateEndTime)
@@ -88,8 +94,7 @@ public class Citizen : MonoBehaviour
     {
         if (!validPath & seeker.IsDone())
         {
-            // TODO: change target detection for protest
-            targetPosition = (Vector2)transform.position + (Random.insideUnitCircle * wanderDistance);
+            targetPosition = protestTarget + (Random.insideUnitCircle * protestWanderDistance);
             seeker.StartPath(transform.position, targetPosition, OnPathComplete);
         }
         else if (path != null)
@@ -126,7 +131,7 @@ public class Citizen : MonoBehaviour
     {
         if (!validPath & seeker.IsDone())
         {
-            targetPosition = (Vector2)transform.position + (Random.insideUnitCircle * wanderDistance);
+            targetPosition = (Vector2)transform.position + (Random.insideUnitCircle * walkWanderDistance);
             seeker.StartPath(transform.position, targetPosition, OnPathComplete);
         }
         else if (path != null)
@@ -190,6 +195,14 @@ public class Citizen : MonoBehaviour
 
     private void SetStagger()
     {
+        if (state == CitizenState.PROTEST)
+        {
+            gc.RegisterProtesterStagger();
+        } else if (state != CitizenState.STAGGER)
+        {
+            gc.RegisterCitizenStagger();
+        }
+
         state = CitizenState.STAGGER;
         validPath = false;
         stateEndTime = Time.fixedTime + staggerTime;
@@ -197,10 +210,32 @@ public class Citizen : MonoBehaviour
 
     private void SetDead()
     {
+        if (state == CitizenState.PROTEST)
+        {
+            gc.RegisterProtesterKill();
+        }
+        else
+        {
+            gc.RegisterCitizenKill();
+        }
+
         state = CitizenState.DEAD;
         validPath = false;
         stateEndTime = Time.fixedTime + deadTime;
         // disable colliders
         GetComponent<Collider2D>().enabled = false;
+    }
+
+    public void SetWalk()
+    {
+        state = CitizenState.WALK;
+        validPath = false;
+    }
+
+    public void SetProtest(Vector2 target)
+    {
+        state = CitizenState.PROTEST;
+        validPath = false;
+        protestTarget = target;
     }
 }
