@@ -11,8 +11,9 @@ public class PlayerController : MonoBehaviour
     public float driftFactor;
     public float reticleDistance;
     public Vector2 aimVector;
-
     public Vector2 centerOfMass;
+
+    public GameObject projectilePrefab;
     public int speedkmh;
 
     private Camera mainCamera;
@@ -90,5 +91,10 @@ public class PlayerController : MonoBehaviour
         // aim cannon
         float angle = Mathf.Atan2(aimVector.y, aimVector.x) * Mathf.Rad2Deg;
         waterCannonTransform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+        if (Input.GetButton("Fire1"))
+        {
+            GameObject.Instantiate(projectilePrefab, waterCannonTransform.GetChild(0).position, Quaternion.identity);
+        }
     }
 }
