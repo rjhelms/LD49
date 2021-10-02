@@ -12,23 +12,30 @@ public class PlayerController : MonoBehaviour
     public float reticleDistance;
     public Vector2 aimVector;
 
+    public Vector2 centerOfMass;
     public int speedkmh;
 
     private Camera mainCamera;
     private Rigidbody2D rb;
     private float currentSpeed;
     private Transform reticleTransform;
+    private Transform waterCannonTransform;
 
     // Start is called before the first frame update
     void Start()
     {
         this.rb = GetComponent<Rigidbody2D>();
+        rb.centerOfMass = centerOfMass;
         this.mainCamera = Camera.main;
         reticleTransform = GameObject.Find("Reticle").transform;
+        waterCannonTransform = GameObject.Find("WaterCannon").transform;
     }
 
     private void FixedUpdate()
     {
+        // just for development - set centerOfMass every tick for tweaking
+        rb.centerOfMass = centerOfMass;
+
         // Get input
         float h = -Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
@@ -79,5 +86,9 @@ public class PlayerController : MonoBehaviour
 
         // move reticle
         reticleTransform.position = (Vector2)mainCamera.transform.position + (aimVector * reticleDistance);
+
+        // aim cannon
+        float angle = Mathf.Atan2(aimVector.y, aimVector.x) * Mathf.Rad2Deg;
+        waterCannonTransform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 }
