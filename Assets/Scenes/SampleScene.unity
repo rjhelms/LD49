@@ -520,12 +520,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   citizenParent: {fileID: 1349828801}
   citizenPrefab: {fileID: 8919675295938530002, guid: 95aa7d72c6d4d7b40a35b5f3ae647635, type: 3}
-  citizenTarget: 10
+  citizenTarget: 25
   citizenSpawnTime: 1
+  targetIncreaseTime: 9
+  targetGrowth: 1.05
   currentEvent: 0
   protestSize: 3
-  protestGrowth: 1.1
-  protestEndScale: 0.3
+  protestGrowth: 1.15
+  protestEndScale: 0.2
+  eventQuietTime: 5
+  eventLerpDown: 0.05
   eventUIText: {fileID: 133533931}
   speedUIText: {fileID: 320645518}
   datetimeUIText: {fileID: 1482485642}
@@ -1058,7 +1062,7 @@ MonoBehaviour:
   centerOfMass: {x: 0, y: 0}
   projectilePrefab: {fileID: 1599566998252998324, guid: 7bd263c44e1084345afea64ddf88be66, type: 3}
   speedmph: 0
-  maxPickupVelocity: 15
+  maxPickupVelocity: 99999
 --- !u!4 &1048147027
 Transform:
   m_ObjectHideFlags: 0

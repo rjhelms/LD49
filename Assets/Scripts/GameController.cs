@@ -20,6 +20,8 @@ public class GameController : MonoBehaviour
 
     public int citizenTarget;
     public float citizenSpawnTime;
+    public float targetIncreaseTime;
+    public float targetGrowth;
 
     public Event currentEvent;
 
@@ -46,6 +48,7 @@ public class GameController : MonoBehaviour
 
     private GameObject[] citizenSpawners;
     private float nextCitizenSpawn;
+    private float nextTargetIncreaseTime;
     private GameObject[] protestLocations;
     private GameObject[] transportLocations;
     private int lastTransportIndex;
@@ -75,6 +78,8 @@ public class GameController : MonoBehaviour
         }
         Debug.Log("Spawned " + i + " citizens");
         nextEventTime = Time.time + eventQuietTime;
+        nextCitizenSpawn = Time.time + citizenSpawnTime;
+        nextTargetIncreaseTime = Time.time + targetIncreaseTime;
     }
 
     // Update is called once per frame
@@ -83,6 +88,17 @@ public class GameController : MonoBehaviour
         if (citizenParent.childCount < citizenTarget && Time.time > nextCitizenSpawn)
         {
             SpawnCitizen();
+        }
+
+        if (Time.time > nextTargetIncreaseTime)
+        {
+            int newCitizenTarget = (int)(citizenTarget * targetGrowth);
+            if (newCitizenTarget == citizenTarget)
+            {
+                newCitizenTarget++;
+            }
+            citizenTarget = newCitizenTarget;
+            nextTargetIncreaseTime = Time.time + targetIncreaseTime;
         }
         if (Input.GetButtonDown("Fire2"))
         {
