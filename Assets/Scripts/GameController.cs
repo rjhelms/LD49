@@ -223,10 +223,10 @@ public class GameController : MonoBehaviour
                     break;
             }
         }
-        if (Input.GetButtonDown("Fire2"))
-        {
-            StartEvent();
-        }
+        //if (Input.GetButtonDown("Fire2"))
+        //{
+        //    StartEvent();
+        //}
         switch (currentEvent)
         {
             case Event.NONE:
