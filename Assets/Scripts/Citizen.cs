@@ -206,7 +206,7 @@ public class Citizen : MonoBehaviour
             return;
         }
 
-        Debug.LogError("unhandled collision btw " + gameObject + " and " + collision.gameObject);
+        //Debug.LogError("unhandled collision btw " + gameObject + " and " + collision.gameObject);
     }
 
     private void SetStagger()
