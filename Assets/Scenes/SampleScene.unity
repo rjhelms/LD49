@@ -724,7 +724,7 @@ MonoBehaviour:
   stabilityUIText: {fileID: 1572242767}
   pointerArrow: {fileID: 514690241}
   arrowTargetTransform: {fileID: 0}
-  arrowCircleSize: 18
+  arrowCircleSize: 17.5
   pickupPrefab: {fileID: 2938622044999635872, guid: 8d898f76b84b36a4a83f90c38393d26e, type: 3}
   dropoffPrefab: {fileID: 3902613848762395135, guid: 3b227154773ff0d478623835da12a87c, type: 3}
   stabilityCitizenStagger: -5
