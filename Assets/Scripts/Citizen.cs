@@ -191,6 +191,13 @@ public class Citizen : MonoBehaviour
                 SetDead();
             }
         }
+
+        // if we hit terrain, get a new path
+        // prevents dudes from getting stuck
+        if (collision.gameObject.CompareTag("Terrain"))
+        {
+            validPath = false;
+        }
     }
 
     private void SetStagger()
