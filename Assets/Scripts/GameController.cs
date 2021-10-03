@@ -9,7 +9,8 @@ public enum Event
 {
     NONE,
     PROTEST,
-    TRANSPORT,
+    TRANSPORT1,
+    TRANSPORT2,
 }
 
 public class GameController : MonoBehaviour
@@ -28,6 +29,10 @@ public class GameController : MonoBehaviour
 
     public Text eventUIText;
     public Text speedUIText;
+    public Text datetimeUIText;
+
+    public GameObject pickupPrefab;
+    public GameObject dropoffPrefab;
 
     private int protestStartSize;
     private int protestRemaining;
@@ -36,7 +41,8 @@ public class GameController : MonoBehaviour
     private float nextCitizenSpawn;
     private GameObject[] protestLocations;
     private GameObject[] transportLocations;
-    
+    private int lastTransportIndex;
+
     private PlayerController pc;
 
     // Start is called before the first frame update
@@ -72,7 +78,7 @@ public class GameController : MonoBehaviour
         }
         if (Input.GetButtonDown("Fire2"))
         {
-            StartProtest();
+            StartTransport();
         }
         switch (currentEvent)
         {
@@ -94,6 +100,7 @@ public class GameController : MonoBehaviour
 
         // UI updates
         speedUIText.text = pc.speedmph + " mph";
+        datetimeUIText.text = (int)(Time.fixedTime % 24) + ":00 DAY " + (int)(Time.fixedTime / 24);
     }
 
     void SpawnCitizen()
@@ -109,6 +116,23 @@ public class GameController : MonoBehaviour
             nextCitizenSpawn = Time.time + citizenSpawnTime;
         }
     }
+
+    void StartTransport()
+    {
+        if (currentEvent != Event.NONE)
+        {
+            Debug.Log("Event already in progress");
+            return;
+        }
+
+        lastTransportIndex = Random.Range(0, transportLocations.Length);
+        Transform transportSite = transportLocations[lastTransportIndex].transform;
+        Instantiate(pickupPrefab, transportSite.position, Quaternion.identity);
+
+        currentEvent = Event.TRANSPORT1;
+        eventUIText.text = "Pick up supplies at " + transportSite.name;
+    }
+
 
     void StartProtest()
     {
@@ -176,5 +200,26 @@ public class GameController : MonoBehaviour
     public void RegisterCitizenKill()
     {
 
+    }
+
+    public void AdvanceTransportState()
+    {
+        if (currentEvent == Event.TRANSPORT1)
+        {
+            currentEvent = Event.TRANSPORT2;
+            int nextTransportIndex = lastTransportIndex;
+            while (nextTransportIndex == lastTransportIndex)
+            {
+                nextTransportIndex = Random.Range(0, transportLocations.Length);
+            }
+            Transform transportSite = transportLocations[nextTransportIndex].transform;
+            Instantiate(dropoffPrefab, transportSite.position, Quaternion.identity);
+            eventUIText.text = "Drop supplies at " + transportSite.name;
+        }
+        else
+        {
+            eventUIText.text = "Supply drop complete";
+            currentEvent = Event.NONE;
+        }
     }
 }

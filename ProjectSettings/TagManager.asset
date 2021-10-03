@@ -9,6 +9,8 @@ TagManager:
   - ProtestSite
   - TransportSite
   - Citizen
+  - TransportPU
+  - TransportDO
   layers:
   - Default
   - TransparentFX

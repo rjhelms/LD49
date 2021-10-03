@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 3480881238845574769}
   - component: {fileID: 2457477308219894906}
   - component: {fileID: 3753116671480474255}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Dropoff
-  m_TagString: Untagged
+  m_TagString: TransportDO
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: -931240730793808255, guid: 9eed61db708206641a61552924caf252, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -93,9 +93,9 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.3333334
+  m_Radius: 1.5

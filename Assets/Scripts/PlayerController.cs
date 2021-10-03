@@ -15,17 +15,19 @@ public class PlayerController : MonoBehaviour
 
     public GameObject projectilePrefab;
     public int speedmph;
-
+    public float maxPickupVelocity;
     private Camera mainCamera;
     private Rigidbody2D rb;
     private float currentSpeed;
     private Transform reticleTransform;
     private Transform waterCannonTransform;
     private Transform projectileParent;
+    private GameController gc;
     // Start is called before the first frame update
     void Start()
     {
         this.rb = GetComponent<Rigidbody2D>();
+        gc = FindObjectOfType<GameController>();
         rb.centerOfMass = centerOfMass;
         this.mainCamera = Camera.main;
         reticleTransform = GameObject.Find("Reticle").transform;
@@ -95,6 +97,18 @@ public class PlayerController : MonoBehaviour
             GameObject projectile = GameObject.Instantiate(
                 projectilePrefab, waterCannonTransform.GetChild(0).position, Quaternion.identity, projectileParent);
             projectile.GetComponent<Projectile>().InitializeMovement(rb.velocity, aimVector);
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if ((collision.tag == "TransportPU" || collision.tag == "TransportDO") && rb.velocity.magnitude <= maxPickupVelocity)
+        {
+            Destroy(collision.gameObject);
+            gc.AdvanceTransportState();
+        } else if (rb.velocity.magnitude >= maxPickupVelocity)
+        {
+            Debug.Log("Too fast!");
         }
     }
 }
