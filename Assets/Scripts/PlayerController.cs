@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public float reticleDistance;
     public Vector2 aimVector;
     public Vector2 centerOfMass;
+    public Vector3 restartPosition;
 
     public GameObject projectilePrefab;
     public int speedmph;
@@ -78,6 +79,14 @@ public class PlayerController : MonoBehaviour
         }
         currentSpeed = rb.velocity.magnitude;
         speedmph = (int)(currentSpeed * 2.237f);
+    }
+
+    public void Reset()
+    {
+        transform.position = restartPosition;
+        rb.velocity = Vector2.zero;
+        rb.angularVelocity = 0f;
+        transform.rotation = Quaternion.identity;
     }
 
     // Update is called once per frame

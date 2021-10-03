@@ -21,6 +21,7 @@ public enum GameState
 
 public class GameController : MonoBehaviour
 {
+    public GameObject musicPlayer;
     public int stability;
     public int maxStability;
 
@@ -42,9 +43,12 @@ public class GameController : MonoBehaviour
     public float eventLerpDown;
 
     public Text eventUIText;
-    public Text speedUIText;
     public Text datetimeUIText;
-    public Text stabilityUIText;  // this is just a placeholder
+    public Image stabilityImage;
+
+    public Color stabilityColorLow;
+    public Color stabilityColorMid;
+    public Color stabilityColorHigh;
 
     public Transform pointerArrow;
     public Transform arrowTargetTransform;
@@ -98,6 +102,12 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (!GameObject.FindGameObjectWithTag("Music"))
+        {
+            GameObject music = Instantiate(musicPlayer);
+            DontDestroyOnLoad(music);
+        }
+            
         stability = maxStability;
         pointerArrow.gameObject.SetActive(false);
         pc = FindObjectOfType<PlayerController>();
@@ -209,9 +219,7 @@ public class GameController : MonoBehaviour
         if (stability > maxStability)
             stability = maxStability;
         // UI updates
-        speedUIText.text = pc.speedmph + " mph";
         datetimeUIText.text = (int)(Time.fixedTime % 24) + ":00 DAY " + (int)(Time.fixedTime / 24);
-        stabilityUIText.text = stability.ToString();
         if (pointerArrow.gameObject.activeSelf)
         {
             Vector2 arrowAimVector = (arrowTargetTransform.position - pc.transform.position).normalized;
@@ -223,8 +231,27 @@ public class GameController : MonoBehaviour
             pointerArrow.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
 
+        stabilityImage.rectTransform.sizeDelta = new Vector2(stability, 8);
+
+        if (stability <= 33)
+        {
+            stabilityImage.color = stabilityColorLow;
+        } else if (stability <= 66)
+        {
+            stabilityImage.color = stabilityColorMid;
+        } else
+        {
+            stabilityImage.color = stabilityColorHigh;
+        }
+
         if (stability <= 0)
             GameOver();
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            stability -= 10;
+            pc.Reset();
+        }
     }
 
     void SpawnCitizen()

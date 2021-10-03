@@ -12,6 +12,7 @@ TagManager:
   - TransportPU
   - TransportDO
   - Terrain
+  - Music
   layers:
   - Default
   - TransparentFX
