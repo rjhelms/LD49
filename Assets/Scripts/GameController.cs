@@ -35,6 +35,9 @@ public class GameController : MonoBehaviour
     public Text eventUIText;
     public Text speedUIText;
     public Text datetimeUIText;
+    public Transform pointerArrow;
+    public Transform arrowTargetTransform;
+    public float arrowCircleSize;
 
     public GameObject pickupPrefab;
     public GameObject dropoffPrefab;
@@ -58,6 +61,7 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        pointerArrow.gameObject.SetActive(false);
         pc = FindObjectOfType<PlayerController>();
         eventUIText.text = "";
         protestLocations = GameObject.FindGameObjectsWithTag("ProtestSite");
@@ -112,6 +116,7 @@ public class GameController : MonoBehaviour
                     StartEvent();
                     eventQuietTime = Mathf.Lerp(eventQuietTime, 0, eventLerpDown);
                 }
+                pointerArrow.gameObject.SetActive(false);
                 break;
             case Event.PROTEST:
                 if (protestRemaining <= (protestStartSize * protestEndScale))
@@ -127,12 +132,28 @@ public class GameController : MonoBehaviour
                             citizen.SetWalk();
                     }
                 }
+                pointerArrow.gameObject.SetActive(!arrowTargetTransform.GetComponent<SpriteRenderer>().isVisible);
+                break;
+            case Event.TRANSPORT1:
+            case Event.TRANSPORT2:
+                pointerArrow.gameObject.SetActive(!arrowTargetTransform.GetComponent<SpriteRenderer>().isVisible);
                 break;
         }
 
         // UI updates
         speedUIText.text = pc.speedmph + " mph";
         datetimeUIText.text = (int)(Time.fixedTime % 24) + ":00 DAY " + (int)(Time.fixedTime / 24);
+
+        if (pointerArrow.gameObject.activeSelf)
+        {
+            Vector2 arrowAimVector = (arrowTargetTransform.position - pc.transform.position).normalized;
+            pointerArrow.position = arrowAimVector * arrowCircleSize;
+            // force Z position
+            pointerArrow.position = new Vector3(pointerArrow.position.x, pointerArrow.position.y, -190);
+
+            float angle = Mathf.Atan2(arrowAimVector.y, arrowAimVector.x) * Mathf.Rad2Deg;
+            pointerArrow.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
     }
 
     void SpawnCitizen()
@@ -174,6 +195,7 @@ public class GameController : MonoBehaviour
 
         lastTransportIndex = Random.Range(0, transportLocations.Length);
         Transform transportSite = transportLocations[lastTransportIndex].transform;
+        arrowTargetTransform = transportSite;
         Instantiate(pickupPrefab, transportSite.position, Quaternion.identity);
 
         currentEvent = Event.TRANSPORT1;
@@ -184,6 +206,7 @@ public class GameController : MonoBehaviour
     void StartProtest()
     {
         Transform protestSite = protestLocations[Random.Range(0, protestLocations.Length)].transform;
+        arrowTargetTransform = protestSite;
         GameObject[] citizens = GameObject.FindGameObjectsWithTag("Citizen");
         float[] distances = new float[citizens.Length];
         for (int i = 0; i < citizens.Length; i++)
@@ -254,6 +277,7 @@ public class GameController : MonoBehaviour
                 nextTransportIndex = Random.Range(0, transportLocations.Length);
             }
             Transform transportSite = transportLocations[nextTransportIndex].transform;
+            arrowTargetTransform = transportSite;
             Instantiate(dropoffPrefab, transportSite.position, Quaternion.identity);
             eventUIText.text = "Drop supplies at " + transportSite.name;
         }

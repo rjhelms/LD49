@@ -13,7 +13,7 @@ TextureImporter:
     second: player_car_2
   - first:
       213: 535074650378604445
-    second: player_car_3
+    second: arrow
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -173,6 +173,27 @@ TextureImporter:
       bones: []
       spriteID: 8f1c8bb7c49198990800000000000000
       internalID: -7383342297813302792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: arrow
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9f02204f87fc6700800000000000000
+      internalID: 535074650378604445
       vertices: []
       indices: 
       edges: []

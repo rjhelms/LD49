@@ -214,7 +214,7 @@ public class Citizen : MonoBehaviour
         {
             gc.RegisterProtesterKill();
         }
-        else
+        else if (state != CitizenState.DEAD)
         {
             gc.RegisterCitizenKill();
         }
