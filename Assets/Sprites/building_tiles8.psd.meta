@@ -1,22 +1,31 @@
 fileFormatVersion: 2
-guid: c8e5c2d4ef61a7f438bde8b7f2d0742a
+guid: 4f9feba3fc08a4c48a504bc0bdc5bf35
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6594373183273407166
-    second: building_tiles3_0
+      213: -4913039335896313046
+    second: building_tiles8_0
   - first:
-      213: 2293187366452112662
-    second: building_tiles3_1
+      213: 8419201414405127931
+    second: building_tiles8_1
   - first:
-      213: -5796025207263892820
-    second: building_tiles3_2
+      213: 1351200562556063938
+    second: building_tiles8_2
   - first:
-      213: 7048690907270975177
-    second: building_tiles3_3
+      213: 2114889240647390240
+    second: building_tiles8_3
   - first:
-      213: -5311559930020338526
-    second: building_tiles3_4
+      213: 5426378532689614221
+    second: building_tiles8_4
+  - first:
+      213: 811345062061934651
+    second: building_tiles8_5
+  - first:
+      213: -793369268957211829
+    second: building_tiles8_6
+  - first:
+      213: 146639121762766881
+    second: building_tiles8_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -118,7 +127,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: building_tiles3_0
+      name: building_tiles8_0
       rect:
         serializedVersion: 2
         x: 0
@@ -129,17 +138,46 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -23, y: -32}
+        - {x: -23, y: 23}
+        - {x: 32, y: 23}
+        - {x: 32, y: -32}
       tessellationDetail: 0
       bones: []
-      spriteID: eb29f51c87be38b50800000000000000
-      internalID: 6594373183273407166
+      spriteID: a23116021c061dbb0800000000000000
+      internalID: -4913039335896313046
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: building_tiles3_1
+      name: building_tiles8_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -32, y: -32}
+        - {x: -32, y: 23}
+        - {x: 23, y: 23}
+        - {x: 23, y: -32}
+      tessellationDetail: 0
+      bones: []
+      spriteID: bfe751e541307d470800000000000000
+      internalID: 8419201414405127931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: building_tiles8_2
       rect:
         serializedVersion: 2
         x: 0
@@ -150,17 +188,46 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -23, y: -32}
+        - {x: -23, y: 32}
+        - {x: 32, y: 32}
+        - {x: 32, y: -32}
       tessellationDetail: 0
       bones: []
-      spriteID: 61daacc82c903df10800000000000000
-      internalID: 2293187366452112662
+      spriteID: 2c0567fa0cd60c210800000000000000
+      internalID: 1351200562556063938
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: building_tiles3_2
+      name: building_tiles8_3
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 23, y: -32}
+        - {x: 23, y: 32}
+        - {x: -32, y: 32}
+        - {x: -32, y: -32}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02455182f88995d10800000000000000
+      internalID: 2114889240647390240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: building_tiles8_4
       rect:
         serializedVersion: 2
         x: 0
@@ -171,17 +238,21 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 2, y: -32}
+        - {x: 2, y: 32}
+        - {x: 32, y: 32}
+        - {x: 32, y: -32}
       tessellationDetail: 0
       bones: []
-      spriteID: caa63db58c1609fa0800000000000000
-      internalID: -5796025207263892820
+      spriteID: d8515c9768e5e4b40800000000000000
+      internalID: 5426378532689614221
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: building_tiles3_3
+      name: building_tiles8_5
       rect:
         serializedVersion: 2
         x: 64
@@ -192,32 +263,65 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: 23, y: -32}
+        - {x: 23, y: 32}
+        - {x: -32, y: 32}
+        - {x: -32, y: -32}
       tessellationDetail: 0
       bones: []
-      spriteID: 9ce896bd80bf1d160800000000000000
-      internalID: 7048690907270975177
+      spriteID: b380876090a724b00800000000000000
+      internalID: 811345062061934651
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: building_tiles3_4
+      name: building_tiles8_6
       rect:
         serializedVersion: 2
-        x: 64
-        y: 192
+        x: 0
+        y: 0
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -23, y: -24}
+        - {x: -23, y: 32}
+        - {x: 32, y: 32}
+        - {x: 32, y: -24}
       tessellationDetail: 0
       bones: []
-      spriteID: 2a460ffa26c8946b0800000000000000
-      internalID: -5311559930020338526
+      spriteID: b4318147ad26df4f0800000000000000
+      internalID: -793369268957211829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: building_tiles8_7
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -32, y: -24}
+        - {x: -32, y: 32}
+        - {x: 23, y: 32}
+        - {x: 23, y: -24}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12058da1187f80200800000000000000
+      internalID: 146639121762766881
       vertices: []
       indices: 
       edges: []
