@@ -1,0 +1,368 @@
+fileFormatVersion: 2
+guid: 40b7c72417a0e274c8813fc72497c38f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8665177967613298852
+    second: building_tiles7_0
+  - first:
+      213: -5456347846406446543
+    second: building_tiles7_1
+  - first:
+      213: -7360017571058913498
+    second: building_tiles7_2
+  - first:
+      213: -2529091995767660271
+    second: building_tiles7_3
+  - first:
+      213: -5542254447024036202
+    second: building_tiles7_4
+  - first:
+      213: -1773393059343395636
+    second: building_tiles7_5
+  - first:
+      213: -6613799087627506808
+    second: building_tiles7_6
+  - first:
+      213: -599751785929684194
+    second: building_tiles7_7
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 6
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: building_tiles7_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: 4, y: -32}
+        - {x: 4, y: -15}
+        - {x: 1, y: -12}
+        - {x: -5, y: -12}
+        - {x: -7, y: -10}
+        - {x: -7, y: 20}
+        - {x: -5, y: 22}
+        - {x: 32, y: 22}
+        - {x: 32, y: -32}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a8c1239375e04870800000000000000
+      internalID: 8665177967613298852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: building_tiles7_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 192
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -32, y: -32}
+        - {x: -32, y: 22}
+        - {x: 16, y: 22}
+        - {x: 18, y: 20}
+        - {x: 18, y: -32}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 132e9fbea882744b0800000000000000
+      internalID: -5456347846406446543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: building_tiles7_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -5, y: -22}
+        - {x: -7, y: -20}
+        - {x: -7, y: 10}
+        - {x: -5, y: 12}
+        - {x: 2, y: 12}
+        - {x: 4, y: 14}
+        - {x: 4, y: 32}
+        - {x: 32, y: 32}
+        - {x: 32, y: -22}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62f6660a307fbd990800000000000000
+      internalID: -7360017571058913498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: building_tiles7_3
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -32, y: -22}
+        - {x: -32, y: 32}
+        - {x: 18, y: 32}
+        - {x: 18, y: -20}
+        - {x: 16, y: -22}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1112cf3ca3cd6ecd0800000000000000
+      internalID: -2529091995767660271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: building_tiles7_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -18, y: -32}
+        - {x: -18, y: 20}
+        - {x: -16, y: 22}
+        - {x: 32, y: 22}
+        - {x: 32, y: -32}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 696ad4ec1f4f513b0800000000000000
+      internalID: -5542254447024036202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: building_tiles7_5
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -4, y: -32}
+        - {x: -32, y: -32}
+        - {x: -32, y: 22}
+        - {x: 5, y: 22}
+        - {x: 7, y: 20}
+        - {x: 7, y: -10}
+        - {x: 5, y: -12}
+        - {x: -2, y: -12}
+        - {x: -4, y: -14}
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc491ba8864a367e0800000000000000
+      internalID: -1773393059343395636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: building_tiles7_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -16, y: -22}
+        - {x: -18, y: -20}
+        - {x: -18, y: 32}
+        - {x: 32, y: 32}
+        - {x: 32, y: -22}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88be82e65c01734a0800000000000000
+      internalID: -6613799087627506808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: building_tiles7_7
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -32, y: -22}
+        - {x: -32, y: 32}
+        - {x: -4, y: 32}
+        - {x: -4, y: 14}
+        - {x: -2, y: 12}
+        - {x: 5, y: 12}
+        - {x: 7, y: 10}
+        - {x: 7, y: -20}
+        - {x: 5, y: -22}
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1b4146ade04da7f0800000000000000
+      internalID: -599751785929684194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
