@@ -82,3 +82,5 @@ other buildings
 	house *
 	apartment *
 	office block *
+	
+	Vector3(253.5,-58.5,0)
