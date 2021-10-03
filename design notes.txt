@@ -49,10 +49,13 @@ events:
 		stability gain on successful delivery
 		target time for each phase - stability drops gradually once over that target
 
+issues:
+	protesters getting stuck somehow?
+		hopefully fixed by centring collider on Citizen
+	
 todo:
 	balance stability - a bit unforgiving
-	draw lots of buildings
-	build level
+	proper stability UI
 	sound
 	music
 	title screens etc
@@ -62,15 +65,20 @@ todo:
 protest sites
 	fountain *
 	police station *
-	courthouse
-	embassy
-	university
-	legislature
+	courthouse *
+	embassy *
+	university *
+	legislature *
 	
 pickup / dropoff sites
 	police station *
 	army base
-	safehouse
-	hospital
-	legislature
-	
+	safehouse *
+	hospital *
+	legislature * 
+	weapons factory
+
+other buildings
+	house *
+	apartment *
+	office block *

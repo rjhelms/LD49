@@ -13,6 +13,12 @@ public enum Event
     TRANSPORT2,
 }
 
+public enum GameState
+{
+    RUNNING,
+    GAMEOVER,
+}
+
 public class GameController : MonoBehaviour
 {
     public int stability;
@@ -65,6 +71,16 @@ public class GameController : MonoBehaviour
     public float protestLerpUp;
     public float protestLerpDown;
 
+    public AudioClip dispatchClip;
+    public AudioClip eventCompleteClip;
+    public AudioClip innocentHitClip;
+    public AudioClip innocentKillClip;
+    public AudioClip protesterHitClip;
+    public AudioClip protesterKillClip;
+    public AudioClip gameOverClip;
+
+    public GameState gameState;
+
     private int protestStartSize;
     private int protestRemaining;
 
@@ -77,6 +93,7 @@ public class GameController : MonoBehaviour
     private float nextEventTime;
     private float nextStabilityTick;
     private PlayerController pc;
+    private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
@@ -84,6 +101,7 @@ public class GameController : MonoBehaviour
         stability = maxStability;
         pointerArrow.gameObject.SetActive(false);
         pc = FindObjectOfType<PlayerController>();
+        audioSource = GetComponent<AudioSource>();
         eventUIText.text = "";
         protestLocations = GameObject.FindGameObjectsWithTag("ProtestSite");
         transportLocations = GameObject.FindGameObjectsWithTag("TransportSite");
@@ -106,11 +124,17 @@ public class GameController : MonoBehaviour
         nextCitizenSpawn = Time.time + citizenSpawnTime;
         nextTargetIncreaseTime = Time.time + targetIncreaseTime;
         nextStabilityTick = Time.time + stabilityTickTime;
+        gameState = GameState.RUNNING;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (gameState == GameState.GAMEOVER)
+        {
+            return;
+        }
+
         if (citizenParent.childCount < citizenTarget && Time.time > nextCitizenSpawn)
         {
             SpawnCitizen();
@@ -164,6 +188,7 @@ public class GameController : MonoBehaviour
                     eventUIText.text = "Protest dispersed";
                     stability += stabilityProtestDispersed;
                     currentEvent = Event.NONE;
+                    audioSource.PlayOneShot(eventCompleteClip);
                     nextEventTime = Time.time + eventQuietTime;
                     GameObject[] citizens = GameObject.FindGameObjectsWithTag("Citizen");
                     foreach (GameObject citizenObject in citizens)
@@ -234,6 +259,8 @@ public class GameController : MonoBehaviour
             StartTransport();
             protestChance = Mathf.Lerp(protestChance, 1.0f, protestLerpUp);
         }
+
+        audioSource.PlayOneShot(dispatchClip);
     }
 
     void StartTransport()
@@ -296,22 +323,26 @@ public class GameController : MonoBehaviour
     {
         protestRemaining--;
         stability += stabilityProtesterStagger;
+        audioSource.PlayOneShot(protesterHitClip);
     }
 
     public void RegisterCitizenStagger()
     {
         stability += stabilityCitizenStagger;
+        audioSource.PlayOneShot(innocentHitClip);
     }
 
     public void RegisterProtesterKill()
     {
         protestRemaining--;
         stability += stabilityProtesterKill;
+        audioSource.PlayOneShot(protesterKillClip);
     }
 
     public void RegisterCitizenKill()
     {
         stability += stabilityCitizenKill;
+        audioSource.PlayOneShot(innocentKillClip);
     }
 
     public void AdvanceTransportState()
@@ -328,6 +359,7 @@ public class GameController : MonoBehaviour
             arrowTargetTransform = transportSite;
             Instantiate(dropoffPrefab, transportSite.position, Quaternion.identity);
             eventUIText.text = "Drop supplies at " + transportSite.name;
+            audioSource.PlayOneShot(dispatchClip);
         }
         else
         {
@@ -335,13 +367,19 @@ public class GameController : MonoBehaviour
             nextEventTime = Time.time + eventQuietTime;
             stability += stabilityProtestDispersed;
             currentEvent = Event.NONE;
+            audioSource.PlayOneShot(eventCompleteClip);
         }
     }
 
     void GameOver()
     {
-        Time.timeScale = 0;
-        eventUIText.text = "GAME OVER";
-        eventUIText.color = new Color32(0xD7, 0x73, 0x55, 0xFF);
+        if (gameState == GameState.RUNNING)
+        {
+            Time.timeScale = 0;
+            eventUIText.text = "GAME OVER";
+            eventUIText.color = new Color32(0xD7, 0x73, 0x55, 0xFF);
+            audioSource.PlayOneShot(gameOverClip);
+            gameState = GameState.GAMEOVER;
+        }
     }
 }

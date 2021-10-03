@@ -23,6 +23,9 @@ public class PlayerController : MonoBehaviour
     private Transform waterCannonTransform;
     private Transform projectileParent;
     private GameController gc;
+    private AudioSource cannonAudioSource;
+    private AudioSource engineAudioSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +36,8 @@ public class PlayerController : MonoBehaviour
         reticleTransform = GameObject.Find("Reticle").transform;
         waterCannonTransform = GameObject.Find("WaterCannon").transform;
         projectileParent = GameObject.Find("ProjectileParent").transform;
+        cannonAudioSource = waterCannonTransform.GetComponent<AudioSource>();
+        engineAudioSource = GetComponent<AudioSource>();
     }
 
     private void FixedUpdate()
@@ -95,10 +100,22 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButton("Fire1"))
         {
+            if (!cannonAudioSource.isPlaying)
+            { 
+                cannonAudioSource.Play();
+            }
             GameObject projectile = GameObject.Instantiate(
                 projectilePrefab, waterCannonTransform.GetChild(0).position, Quaternion.identity, projectileParent);
             projectile.GetComponent<Projectile>().InitializeMovement(rb.velocity, aimVector);
+        } else
+        {
+            if (cannonAudioSource.isPlaying)
+            {
+                cannonAudioSource.Pause();
+            }
         }
+
+        engineAudioSource.pitch = Mathf.Lerp(0.75f, 6f, speedmph / 60.0f);
     }
 
     private void OnTriggerStay2D(Collider2D collision)
