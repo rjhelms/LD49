@@ -179,6 +179,7 @@ public class Citizen : MonoBehaviour
         if (collision.gameObject.CompareTag("PlayerProjectile"))
         {
             SetStagger();
+            return;
         }
 
         if (collision.gameObject.CompareTag("Player"))
@@ -190,6 +191,7 @@ public class Citizen : MonoBehaviour
             {
                 SetDead();
             }
+            return;
         }
 
         // if we hit terrain, get a new path
@@ -197,7 +199,10 @@ public class Citizen : MonoBehaviour
         if (collision.gameObject.CompareTag("Terrain"))
         {
             validPath = false;
+            return;
         }
+
+        Debug.LogError("unhandled collision btw " + gameObject + " and " + collision.gameObject);
     }
 
     private void SetStagger()

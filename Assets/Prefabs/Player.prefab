@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 6719957048414774132}
   - component: {fileID: 6719957048414774133}
   - component: {fileID: 6719957048414774131}
-  - component: {fileID: 6719957048414774135}
+  - component: {fileID: 7980491651884589951}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -211,7 +211,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
-  m_Mass: 5.833333
+  m_Mass: 5.560399
   m_LinearDrag: 0.8
   m_AngularDrag: 2
   m_GravityScale: 0
@@ -242,8 +242,8 @@ MonoBehaviour:
   projectilePrefab: {fileID: 1599566998252998324, guid: 7bd263c44e1084345afea64ddf88be66, type: 3}
   speedmph: 0
   maxPickupVelocity: 99999
---- !u!61 &6719957048414774135
-BoxCollider2D:
+--- !u!70 &7980491651884589951
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -256,15 +256,5 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.3333335, y: 5.3333335}
-    newSize: {x: 32, y: 32}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.6666666, y: 3.5}
-  m_EdgeRadius: 0
+  m_Size: {x: 1.62, y: 3.78}
+  m_Direction: 0
