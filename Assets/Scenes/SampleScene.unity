@@ -468,6 +468,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 132a6d21b99197f44b998b472604611a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stability: 0
+  maxStability: 100
   citizenParent: {fileID: 1349828801}
   citizenPrefab: {fileID: 8919675295938530002, guid: 95aa7d72c6d4d7b40a35b5f3ae647635, type: 3}
   citizenTarget: 25
@@ -483,11 +485,22 @@ MonoBehaviour:
   eventUIText: {fileID: 133533931}
   speedUIText: {fileID: 320645518}
   datetimeUIText: {fileID: 1482485642}
+  stabilityUIText: {fileID: 1572242767}
   pointerArrow: {fileID: 514690241}
   arrowTargetTransform: {fileID: 0}
   arrowCircleSize: 18
   pickupPrefab: {fileID: 2938622044999635872, guid: 8d898f76b84b36a4a83f90c38393d26e, type: 3}
   dropoffPrefab: {fileID: 3902613848762395135, guid: 3b227154773ff0d478623835da12a87c, type: 3}
+  stabilityCitizenStagger: -5
+  stabilityProtesterStagger: 2
+  stabilityCitizenKill: -10
+  stabilityProtesterKill: -2
+  stabilityProtestDispersed: 10
+  stabilitySupplyDropComplete: 10
+  stabilityTickNone: -1
+  stabilityTickProtest: -5
+  stabilityTickTransport: -1
+  stabilityTickTime: 3
   protestChance: 0.25
   protestLerpUp: 0.2
   protestLerpDown: 0.1
@@ -690,7 +703,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &514690241
 Transform:
   m_ObjectHideFlags: 0
@@ -822,15 +835,15 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.17788945
-    y: 0.102649
-    width: 0.6432161
-    height: 0.794702
+    x: 0
+    y: 0
+    width: 1
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 20
+  orthographic size: 40
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1385,15 +1398,15 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.17788945
-    y: 0.102649
-    width: 0.6432161
-    height: 0.794702
+    x: 0
+    y: 0
+    width: 1
+    height: 1
   near clip plane: 0.3
   far clip plane: 100
   field of view: 60
   orthographic: 1
-  orthographic size: 20
+  orthographic size: 40
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2

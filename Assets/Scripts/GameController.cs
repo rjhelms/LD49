@@ -15,6 +15,9 @@ public enum Event
 
 public class GameController : MonoBehaviour
 {
+    public int stability;
+    public int maxStability;
+
     public Transform citizenParent;
     public GameObject citizenPrefab;
 
@@ -35,12 +38,28 @@ public class GameController : MonoBehaviour
     public Text eventUIText;
     public Text speedUIText;
     public Text datetimeUIText;
+    public Text stabilityUIText;  // this is just a placeholder
+
     public Transform pointerArrow;
     public Transform arrowTargetTransform;
     public float arrowCircleSize;
 
     public GameObject pickupPrefab;
     public GameObject dropoffPrefab;
+
+    public int stabilityCitizenStagger;
+    public int stabilityProtesterStagger;
+    public int stabilityCitizenKill;
+    public int stabilityProtesterKill;
+
+    public int stabilityProtestDispersed;
+    public int stabilitySupplyDropComplete;
+
+    public int stabilityTickNone;
+    public int stabilityTickProtest;
+    public int stabilityTickTransport;
+
+    public float stabilityTickTime;
 
     public float protestChance;
     public float protestLerpUp;
@@ -56,11 +75,13 @@ public class GameController : MonoBehaviour
     private GameObject[] transportLocations;
     private int lastTransportIndex;
     private float nextEventTime;
+    private float nextStabilityTick;
     private PlayerController pc;
 
     // Start is called before the first frame update
     void Start()
     {
+        stability = maxStability;
         pointerArrow.gameObject.SetActive(false);
         pc = FindObjectOfType<PlayerController>();
         eventUIText.text = "";
@@ -84,6 +105,7 @@ public class GameController : MonoBehaviour
         nextEventTime = Time.time + eventQuietTime;
         nextCitizenSpawn = Time.time + citizenSpawnTime;
         nextTargetIncreaseTime = Time.time + targetIncreaseTime;
+        nextStabilityTick = Time.time + stabilityTickTime;
     }
 
     // Update is called once per frame
@@ -104,6 +126,24 @@ public class GameController : MonoBehaviour
             citizenTarget = newCitizenTarget;
             nextTargetIncreaseTime = Time.time + targetIncreaseTime;
         }
+
+        if (Time.time > nextStabilityTick)
+        {
+            nextStabilityTick = Time.time + stabilityTickTime;
+            switch (currentEvent)
+            {
+                case Event.NONE:
+                    stability += stabilityTickNone;
+                    break;
+                case Event.PROTEST:
+                    stability += stabilityTickProtest;
+                    break;
+                case Event.TRANSPORT1:
+                case Event.TRANSPORT2:
+                    stability += stabilityTickTransport;
+                    break;
+            }
+        }
         if (Input.GetButtonDown("Fire2"))
         {
             StartEvent();
@@ -121,7 +161,8 @@ public class GameController : MonoBehaviour
             case Event.PROTEST:
                 if (protestRemaining <= (protestStartSize * protestEndScale))
                 {
-                    eventUIText.text = "Protest succesfully dispersed";
+                    eventUIText.text = "Protest dispersed";
+                    stability += stabilityProtestDispersed;
                     currentEvent = Event.NONE;
                     nextEventTime = Time.time + eventQuietTime;
                     GameObject[] citizens = GameObject.FindGameObjectsWithTag("Citizen");
@@ -140,10 +181,12 @@ public class GameController : MonoBehaviour
                 break;
         }
 
+        if (stability > maxStability)
+            stability = maxStability;
         // UI updates
         speedUIText.text = pc.speedmph + " mph";
         datetimeUIText.text = (int)(Time.fixedTime % 24) + ":00 DAY " + (int)(Time.fixedTime / 24);
-
+        stabilityUIText.text = stability.ToString();
         if (pointerArrow.gameObject.activeSelf)
         {
             Vector2 arrowAimVector = (arrowTargetTransform.position - pc.transform.position).normalized;
@@ -154,6 +197,9 @@ public class GameController : MonoBehaviour
             float angle = Mathf.Atan2(arrowAimVector.y, arrowAimVector.x) * Mathf.Rad2Deg;
             pointerArrow.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
+
+        if (stability <= 0)
+            GameOver();
     }
 
     void SpawnCitizen()
@@ -249,21 +295,23 @@ public class GameController : MonoBehaviour
     public void RegisterProtesterStagger()
     {
         protestRemaining--;
+        stability += stabilityProtesterStagger;
     }
 
     public void RegisterCitizenStagger()
     {
-
+        stability += stabilityCitizenStagger;
     }
 
     public void RegisterProtesterKill()
     {
         protestRemaining--;
+        stability += stabilityProtesterKill;
     }
 
     public void RegisterCitizenKill()
     {
-
+        stability += stabilityCitizenKill;
     }
 
     public void AdvanceTransportState()
@@ -285,7 +333,15 @@ public class GameController : MonoBehaviour
         {
             eventUIText.text = "Supply drop complete";
             nextEventTime = Time.time + eventQuietTime;
+            stability += stabilityProtestDispersed;
             currentEvent = Event.NONE;
         }
+    }
+
+    void GameOver()
+    {
+        Time.timeScale = 0;
+        eventUIText.text = "GAME OVER";
+        eventUIText.color = new Color32(0xD7, 0x73, 0x55, 0xFF);
     }
 }
