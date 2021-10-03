@@ -86,7 +86,8 @@ public class PlayerController : MonoBehaviour
         aimVector = (mousePosition - (Vector2)transform.position).normalized;
 
         // move reticle
-        reticleTransform.position = (Vector2)mainCamera.transform.position + (aimVector * reticleDistance);
+        reticleTransform.position = aimVector * reticleDistance;
+        reticleTransform.position = new Vector3(reticleTransform.position.x, reticleTransform.position.y, -190);
 
         // aim cannon
         float angle = Mathf.Atan2(aimVector.y, aimVector.x) * Mathf.Rad2Deg;

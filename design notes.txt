@@ -50,7 +50,6 @@ events:
 		target time for each phase - stability drops gradually once over that target
 
 todo:
-	move reticle to UI layer
 	balance stability - a bit unforgiving
 	draw lots of buildings
 	build level
