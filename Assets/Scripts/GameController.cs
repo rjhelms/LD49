@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 public enum Event
@@ -15,6 +16,7 @@ public enum Event
 
 public enum GameState
 {
+    STARTING,
     RUNNING,
     GAMEOVER,
 }
@@ -49,6 +51,10 @@ public class GameController : MonoBehaviour
     public Color stabilityColorLow;
     public Color stabilityColorMid;
     public Color stabilityColorHigh;
+
+    public Image FadeOverlay;
+
+    public float fadeTime = 1f;
 
     public Transform pointerArrow;
     public Transform arrowTargetTransform;
@@ -98,7 +104,8 @@ public class GameController : MonoBehaviour
     private float nextStabilityTick;
     private PlayerController pc;
     private AudioSource audioSource;
-
+    private float endFadeTime;
+    private float startTime;
     // Start is called before the first frame update
     void Start()
     {
@@ -134,15 +141,53 @@ public class GameController : MonoBehaviour
         nextCitizenSpawn = Time.time + citizenSpawnTime;
         nextTargetIncreaseTime = Time.time + targetIncreaseTime;
         nextStabilityTick = Time.time + stabilityTickTime;
-        gameState = GameState.RUNNING;
+        gameState = GameState.STARTING;
+        endFadeTime = -1;   // dummy value so fade doesn't start till we're in update
+        startTime = Time.fixedTime;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+
+        if (gameState == GameState.STARTING)
+        {
+            if (endFadeTime == -1)
+            {
+                endFadeTime = Time.unscaledTime + fadeTime;
+                return;
+            }
+
+            if (Time.unscaledTime > endFadeTime)
+            {
+                gameState = GameState.RUNNING;
+                FadeOverlay.color = Color.clear;
+                Time.timeScale = 1;
+            }
+            else
+            {
+                FadeOverlay.color = Color.Lerp(Color.clear, Color.black, endFadeTime - Time.unscaledTime);
+                Debug.Log("start fade: " + (endFadeTime - Time.unscaledTime));
+                startTime = Time.fixedTime;
+            }
+        }  
+
         if (gameState == GameState.GAMEOVER)
         {
-            return;
+            if (Time.unscaledTime > endFadeTime)
+            {
+                FadeOverlay.color = Color.black;
+                Time.timeScale = 1;
+                SceneManager.LoadScene("gameOver");
+            }
+            else
+            {
+                FadeOverlay.color = Color.Lerp(Color.black, Color.clear, endFadeTime - Time.unscaledTime); ;
+            }
         }
 
         if (citizenParent.childCount < citizenTarget && Time.time > nextCitizenSpawn)
@@ -219,7 +264,7 @@ public class GameController : MonoBehaviour
         if (stability > maxStability)
             stability = maxStability;
         // UI updates
-        datetimeUIText.text = (int)(Time.fixedTime % 24) + ":00 DAY " + (int)(Time.fixedTime / 24);
+        datetimeUIText.text = (int)((Time.fixedTime - startTime) % 24) + ":00 DAY " + (int)((Time.fixedTime - startTime) / 24);
         if (pointerArrow.gameObject.activeSelf)
         {
             Vector2 arrowAimVector = (arrowTargetTransform.position - pc.transform.position).normalized;
@@ -402,11 +447,13 @@ public class GameController : MonoBehaviour
     {
         if (gameState == GameState.RUNNING)
         {
+            gameState = GameState.GAMEOVER;
             Time.timeScale = 0;
             eventUIText.text = "GAME OVER";
             eventUIText.color = new Color32(0xD7, 0x73, 0x55, 0xFF);
             audioSource.PlayOneShot(gameOverClip);
-            gameState = GameState.GAMEOVER;
+            endFadeTime = Time.unscaledTime + fadeTime;
+            ScoreManager.Instance.score = (int)((Time.fixedTime - startTime) / 24);
         }
     }
 }

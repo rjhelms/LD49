@@ -43,9 +43,10 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // just for development - set centerOfMass every tick for tweaking
-        rb.centerOfMass = centerOfMass;
-
+        if (gc.gameState != GameState.RUNNING)
+        {
+            return;
+        }
         // Get input
         float h = -Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
@@ -94,6 +95,11 @@ public class PlayerController : MonoBehaviour
     {
         // move main camera - this is dumb
         mainCamera.transform.position = transform.position + new Vector3(0, 0, -10);
+
+        if (gc.gameState != GameState.RUNNING)
+        {
+            return;
+        }
 
         // calculate aimVector based on mouse position - this needs to happen after camera move
         Vector2 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);

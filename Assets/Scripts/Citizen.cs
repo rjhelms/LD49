@@ -68,6 +68,10 @@ public class Citizen : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (gc.gameState != GameState.RUNNING)
+        {
+            return;
+        }
         // get a new path if we don't have one, but aren't looking for one
         switch (state)
         {
