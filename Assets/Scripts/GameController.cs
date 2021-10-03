@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 using Random = UnityEngine.Random;
 
@@ -24,6 +25,10 @@ public class GameController : MonoBehaviour
     public int protestSize;
     public float protestGrowth;
     public float protestEndScale;
+
+    public Text eventUIText;
+    public Text speedUIText;
+
     private int protestStartSize;
     private int protestRemaining;
 
@@ -31,10 +36,14 @@ public class GameController : MonoBehaviour
     private float nextCitizenSpawn;
     private GameObject[] protestLocations;
     private GameObject[] transportLocations;
+    
+    private PlayerController pc;
 
     // Start is called before the first frame update
     void Start()
     {
+        pc = FindObjectOfType<PlayerController>();
+        eventUIText.text = "";
         protestLocations = GameObject.FindGameObjectsWithTag("ProtestSite");
         transportLocations = GameObject.FindGameObjectsWithTag("TransportSite");
         citizenSpawners = GameObject.FindGameObjectsWithTag("CitizenSpawner");
@@ -70,7 +79,7 @@ public class GameController : MonoBehaviour
             case Event.PROTEST:
                 if (protestRemaining <= (protestStartSize * protestEndScale))
                 {
-                    Debug.Log("Protest succesfully dispersed");
+                    eventUIText.text = "Protest succesfully dispersed";
                     currentEvent = Event.NONE;
                     GameObject[] citizens = GameObject.FindGameObjectsWithTag("Citizen");
                     foreach (GameObject citizenObject in citizens)
@@ -82,6 +91,9 @@ public class GameController : MonoBehaviour
                 }
                 break;
         }
+
+        // UI updates
+        speedUIText.text = pc.speedmph + " mph";
     }
 
     void SpawnCitizen()
@@ -143,7 +155,7 @@ public class GameController : MonoBehaviour
         protestRemaining = protestStartSize;
         protestSize = newProtestSize;
         currentEvent = Event.PROTEST;
-        Debug.Log("Protest starting at " + protestSite);
+        eventUIText.text = protestStartSize + " protestors rioting at " + protestSite.name;
     }
 
     public void RegisterProtesterStagger()

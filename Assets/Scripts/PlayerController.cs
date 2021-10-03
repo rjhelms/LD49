@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     public Vector2 centerOfMass;
 
     public GameObject projectilePrefab;
-    public int speedkmh;
+    public int speedmph;
 
     private Camera mainCamera;
     private Rigidbody2D rb;
@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
             rb.velocity = rb.velocity.normalized * maxSpeed;
         }
         currentSpeed = rb.velocity.magnitude;
-        speedkmh = (int)(currentSpeed * 3.6f);
+        speedmph = (int)(currentSpeed * 2.237f);
     }
 
     // Update is called once per frame
