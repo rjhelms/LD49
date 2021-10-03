@@ -34,6 +34,10 @@ public class GameController : MonoBehaviour
     public GameObject pickupPrefab;
     public GameObject dropoffPrefab;
 
+    public float protestChance;
+    public float protestLerpUp;
+    public float protestLerpDown;
+
     private int protestStartSize;
     private int protestRemaining;
 
@@ -78,7 +82,7 @@ public class GameController : MonoBehaviour
         }
         if (Input.GetButtonDown("Fire2"))
         {
-            StartTransport();
+            StartEvent();
         }
         switch (currentEvent)
         {
@@ -114,6 +118,19 @@ public class GameController : MonoBehaviour
         else
         {
             nextCitizenSpawn = Time.time + citizenSpawnTime;
+        }
+    }
+
+    void StartEvent()
+    {
+        if (Random.value < protestChance)
+        {
+            StartProtest();
+            protestChance = Mathf.Lerp(protestChance, 0.0f, protestLerpDown);
+        } else
+        {
+            StartTransport();
+            protestChance = Mathf.Lerp(protestChance, 1.0f, protestLerpUp);
         }
     }
 
