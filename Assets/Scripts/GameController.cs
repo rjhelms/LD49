@@ -27,6 +27,9 @@ public class GameController : MonoBehaviour
     public float protestGrowth;
     public float protestEndScale;
 
+    public float eventQuietTime;
+    public float eventLerpDown;
+
     public Text eventUIText;
     public Text speedUIText;
     public Text datetimeUIText;
@@ -46,7 +49,7 @@ public class GameController : MonoBehaviour
     private GameObject[] protestLocations;
     private GameObject[] transportLocations;
     private int lastTransportIndex;
-
+    private float nextEventTime;
     private PlayerController pc;
 
     // Start is called before the first frame update
@@ -71,6 +74,7 @@ public class GameController : MonoBehaviour
             }
         }
         Debug.Log("Spawned " + i + " citizens");
+        nextEventTime = Time.time + eventQuietTime;
     }
 
     // Update is called once per frame
@@ -86,11 +90,19 @@ public class GameController : MonoBehaviour
         }
         switch (currentEvent)
         {
+            case Event.NONE:
+                if (Time.time > nextEventTime)
+                {
+                    StartEvent();
+                    eventQuietTime = Mathf.Lerp(eventQuietTime, 0, eventLerpDown);
+                }
+                break;
             case Event.PROTEST:
                 if (protestRemaining <= (protestStartSize * protestEndScale))
                 {
                     eventUIText.text = "Protest succesfully dispersed";
                     currentEvent = Event.NONE;
+                    nextEventTime = Time.time + eventQuietTime;
                     GameObject[] citizens = GameObject.FindGameObjectsWithTag("Citizen");
                     foreach (GameObject citizenObject in citizens)
                     {
@@ -123,11 +135,18 @@ public class GameController : MonoBehaviour
 
     void StartEvent()
     {
+        if (currentEvent != Event.NONE)
+        {
+            Debug.Log("Event already in progress");
+            return;
+        }
+
         if (Random.value < protestChance)
         {
             StartProtest();
             protestChance = Mathf.Lerp(protestChance, 0.0f, protestLerpDown);
-        } else
+        }
+        else
         {
             StartTransport();
             protestChance = Mathf.Lerp(protestChance, 1.0f, protestLerpUp);
@@ -136,11 +155,6 @@ public class GameController : MonoBehaviour
 
     void StartTransport()
     {
-        if (currentEvent != Event.NONE)
-        {
-            Debug.Log("Event already in progress");
-            return;
-        }
 
         lastTransportIndex = Random.Range(0, transportLocations.Length);
         Transform transportSite = transportLocations[lastTransportIndex].transform;
@@ -153,12 +167,6 @@ public class GameController : MonoBehaviour
 
     void StartProtest()
     {
-        if (currentEvent != Event.NONE)
-        {
-            Debug.Log("Event already in progress");
-            return;
-        }
-
         Transform protestSite = protestLocations[Random.Range(0, protestLocations.Length)].transform;
         GameObject[] citizens = GameObject.FindGameObjectsWithTag("Citizen");
         float[] distances = new float[citizens.Length];
@@ -196,7 +204,7 @@ public class GameController : MonoBehaviour
         protestRemaining = protestStartSize;
         protestSize = newProtestSize;
         currentEvent = Event.PROTEST;
-        eventUIText.text = protestStartSize + " protestors rioting at " + protestSite.name;
+        eventUIText.text = "Illegal gathering at " + protestSite.name;
     }
 
     public void RegisterProtesterStagger()
@@ -236,6 +244,7 @@ public class GameController : MonoBehaviour
         else
         {
             eventUIText.text = "Supply drop complete";
+            nextEventTime = Time.time + eventQuietTime;
             currentEvent = Event.NONE;
         }
     }
