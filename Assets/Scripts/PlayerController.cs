@@ -141,7 +141,7 @@ public class PlayerController : MonoBehaviour
             gc.AdvanceTransportState();
         } else if (rb.velocity.magnitude >= maxPickupVelocity)
         {
-            Debug.Log("Too fast!");
+            // Debug.Log("Too fast!");
         }
     }
 }

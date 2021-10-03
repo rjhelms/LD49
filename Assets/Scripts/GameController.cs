@@ -132,11 +132,11 @@ public class GameController : MonoBehaviour
             i++;
             if (i >= citizenTarget)
             {
-                Debug.Log("Spawned too many citizens!");
+                // Debug.Log("Spawned too many citizens!");
                 return;
             }
         }
-        Debug.Log("Spawned " + i + " citizens");
+        // Debug.Log("Spawned " + i + " citizens");
         nextEventTime = Time.time + eventQuietTime;
         nextCitizenSpawn = Time.time + citizenSpawnTime;
         nextTargetIncreaseTime = Time.time + targetIncreaseTime;
@@ -171,7 +171,7 @@ public class GameController : MonoBehaviour
             else
             {
                 FadeOverlay.color = Color.Lerp(Color.clear, Color.black, endFadeTime - Time.unscaledTime);
-                Debug.Log("start fade: " + (endFadeTime - Time.unscaledTime));
+                // Debug.Log("start fade: " + (endFadeTime - Time.unscaledTime));
                 startTime = Time.fixedTime;
             }
         }  
@@ -317,7 +317,7 @@ public class GameController : MonoBehaviour
     {
         if (currentEvent != Event.NONE)
         {
-            Debug.Log("Event already in progress");
+            // Debug.Log("Event already in progress");
             return;
         }
 
