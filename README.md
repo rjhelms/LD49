@@ -6,4 +6,4 @@ A game for Ludum Dare 49
 
 This project requires the free version Aron Granberg's [A* Pathfinding Project](https://arongranberg.com/astar/), not included in this source repo. This needs to be downloaded and added to the Unity project in the default location.
 
-Font Px437_IBM_EGA_8x8.ttf sourced from (The Ultimate Oldschool PC Font Pack)[https://int10h.org/oldschool-pc-fonts/], licensed CC BY-SA 4.0.
+Font Px437_IBM_EGA_8x8.ttf sourced from [The Ultimate Oldschool PC Font Pack](https://int10h.org/oldschool-pc-fonts/), licensed CC BY-SA 4.0.
